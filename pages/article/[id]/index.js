@@ -1,4 +1,5 @@
 
+import {server} from '../../../config';
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -21,51 +22,75 @@ const Article = ({ article }) => {
 }
 
 export const getStaticProps = async (context) => {
-    try {
-        const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params.id}`);
-        const article = await res.json();
-        return {
-            props: {
-                article
-            }
-        }
-    } catch (error) {
-        const res = await fetch(`http://localhost:8000/data/${context.params.id}`);
-        const article = await res.json();
-        return {
-            props: {
-                article
-            }
+    const res = await fetch(`${server}/api/articles/${context.params.id}`);
+    const article = await res.json();
+
+    return {
+        props: {
+            article
         }
     }
 }
 
 export const getStaticPaths = async () => {
-    try {
-        const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-        const articles = await res.json();
+    const res = await fetch(`${server}/api/articles/`);
+    const articles = await res.json();
 
-        const ids = articles.map(article => article.id);
+    const ids = articles.map(article => article.id);
+    const paths = ids.map(id => ({params: {id: id.toString()}}))
 
-        const paths = ids.map(id => ({params: {id: id.toString()}}))
-
-        return {
-            paths,
-            fallback: false
-        }
-    } catch (error) {
-        const res = await fetch(`http://localhost:8000/data`);
-        const articles = await res.json();
-
-        const ids = articles.map(article => article.id);
-
-        const paths = ids.map(id => ({params: {id: id.toString()}}))
-
-        return {
-            paths,
-            fallback: false
-        }
+    return {
+        paths,
+        fallback: false
     }
 }
+
+// export const getStaticProps = async (context) => {
+//     try {
+//         const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${context.params.id}`);
+//         const article = await res.json();
+//         return {
+//             props: {
+//                 article
+//             }
+//         }
+//     } catch (error) {
+//         const res = await fetch(`http://localhost:8000/data/${context.params.id}`);
+//         const article = await res.json();
+//         return {
+//             props: {
+//                 article
+//             }
+//         }
+//     }
+// }
+
+// export const getStaticPaths = async () => {
+//     try {
+//         const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+//         const articles = await res.json();
+
+//         const ids = articles.map(article => article.id);
+
+//         const paths = ids.map(id => ({params: {id: id.toString()}}))
+
+//         return {
+//             paths,
+//             fallback: false
+//         }
+//     } catch (error) {
+//         const res = await fetch(`http://localhost:8000/data`);
+//         const articles = await res.json();
+
+//         const ids = articles.map(article => article.id);
+
+//         const paths = ids.map(id => ({params: {id: id.toString()}}))
+
+//         return {
+//             paths,
+//             fallback: false
+//         }
+//     }
+// }
  
 export default Article;
