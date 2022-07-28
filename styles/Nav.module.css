@@ -18,3 +18,10 @@
 .nav ul li a {
     margin: 5px 15px;
 }
+
+/* @media (prefers-color-scheme: dark) {
+    .nav {
+        background-color: #000;
+    }
+} */
+  
