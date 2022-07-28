@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "userId": 1,
+            "title": "News One",
+            "body": "How to programming in php"
+        },
+        {
+            "id": 2,
+            "userId": 1,
+            "title": "News Two",
+            "body": "How to programming in python"
+        },
+        {
+            "id": 3,
+            "userId": 1,
+            "title": "News Three",
+            "body": "How to programming in ruby"
+        },
+        {
+            "id": 4,
+            "userId": 1,
+            "title": "News Four",
+            "body": "How to programmin in perl"
+        },
+        {
+            "id": 5,
+            "userId": 1,
+            "title": "News Five",
+            "body": "How to programmin in css"
+        },
+        {
+            "id": 6,
+            "userId": 1,
+            "title": "News Six",
+            "body": "How to programmin in html"
+        }
+    ]
+}
